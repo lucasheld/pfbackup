@@ -3,20 +3,23 @@ package cmd
 import (
 	"fmt"
 	"github.com/lucasheld/pfbackup/pfsense"
+	"github.com/lucasheld/pfbackup/version"
 	"github.com/spf13/cobra"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 )
 
 var (
-	url      string
-	user     string
-	pass     string
-	noVerify bool
-	path     string
+	showVersion bool
+	url         string
+	user        string
+	pass        string
+	noVerify    bool
+	path        string
 
 	rootCmd = &cobra.Command{
 		Use:   "pfbackup",
@@ -35,6 +38,8 @@ func Execute() {
 }
 
 func init() {
+	rootCmd.Flags().BoolVarP(&showVersion, "version", "v", false, "Print the version number")
+
 	rootCmd.Flags().StringVarP(&url, "url", "", "", "pfSense url (required)")
 	rootCmd.Flags().StringVarP(&user, "user", "", "", "pfSense username (required)")
 	rootCmd.Flags().StringVarP(&pass, "pass", "", "", "pfSense password (required)")
@@ -46,6 +51,12 @@ func init() {
 	rootCmd.MarkFlagRequired("pass")
 }
 
+func printVersion() {
+	fmt.Printf("pfbackup %s\n", version.Version)
+	fmt.Printf("- os/arch: %s/%s\n", runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("- go version: %s\n", runtime.Version())
+}
+
 func writeConfigFile(path string, content []byte) {
 	err := ioutil.WriteFile(path, content, 0644)
 	if err != nil {
@@ -54,6 +65,11 @@ func writeConfigFile(path string, content []byte) {
 }
 
 func run() {
+	if showVersion {
+		printVersion()
+		return
+	}
+
 	url := strings.TrimSuffix(url, "/")
 	settings := &pfsense.Settings{
 		Url:      url,
