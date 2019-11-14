@@ -25,15 +25,15 @@ run-build = $(MAKE) FC=$(1) FFLAGS=$(2) PETSC_FFLAGS=$(3) TARGET=$@ LEXT="$(1)_$
 
 build-linux:
 	@echo "building linux..."
-	@GOOS=linux GOARCH=386 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-linux-386 pfbackup.go
-	@GOOS=linux GOARCH=amd64 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-linux-amd64 pfbackup.go
+	@GOOS=linux GOARCH=386 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-${VERSION}-linux-386 pfbackup.go
+	@GOOS=linux GOARCH=amd64 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-${VERSION}-linux-amd64 pfbackup.go
 
 build-windows:
 	@echo "building windows..."
-	@GOOS=windows GOARCH=386 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-windows-386.exe pfbackup.go
-	@GOOS=windows GOARCH=amd64 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-windows-amd64.exe pfbackup.go
+	@GOOS=windows GOARCH=386 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-${VERSION}-windows-386.exe pfbackup.go
+	@GOOS=windows GOARCH=amd64 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-${VERSION}-windows-amd64.exe pfbackup.go
 
 build-osx:
 	@echo "building osx..."
-	@GOOS=darwin GOARCH=386 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-darwin-386 pfbackup.go
-	@GOOS=darwin GOARCH=amd64 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-darwin-amd64 pfbackup.go
+	@GOOS=darwin GOARCH=386 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-${VERSION}-darwin-386 pfbackup.go
+	@GOOS=darwin GOARCH=amd64 go build -ldflags "-X ${PKG}/version.Version=${VERSION}" -o ${OUT}-${VERSION}-darwin-amd64 pfbackup.go
