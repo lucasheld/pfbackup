@@ -18,6 +18,7 @@ deploy:
   provider: releases
   api_key:
     secure: ss2pAobyCOdNxyDw5uv7F8AdxopmCknhjhTxl/O3XM+0QSeDUs8Vi1zTCaD8VywdJ66uomBRZqJ++Lct1krABa6uzmJEfoEEUkEs13jtqBJXhYpX5iqCBMng+7VcnaWCJ8Kbx8pvFkX7gMO8fqgHrnc+amqMGdm296Mib44h6wzr9MCKtghOlKb7SvcVM1/DrLZS7aj9dbcDcx9e8Qd7C1b6s6KF2lri4blc+5JbQ8Tkgy5FRNufFxhlqGzxSvfWhCNy+71MGU0ay84Q3etuWo/Ai0d7yTw2UZXNmv7VKL36m50UdBUc4LiPSIvrj7nXnDNL6ta0o/29BIzeGAGTQ4h4+NDtkfvLSFGKmjuWPdJgnDme88hO0xIVAou1vGYODpvp/9clDYtOUCPIUa19ZsmnpqxOz51sbcEwjOSehPYp3+aIQwoz+0Gbrr9/pBVCTP9p5/5mWTpWh1edMPhl5x6n2YTziTFuZ9q8kcN3iwjzteLiHtZBQVJpxqCCjfczIBtjOJMkxNoBN4nMw9zCMndHaK1o2M7bANqt3dCkksRpwbqx7S06i9V/7+UqJGPoqxkJskOdlnwEgPub4wDkTwFwnluw8QdU5TVmQKWBc2faHNhIAQ+Ypwtmh/Z/Q8xbye23ZXqecvDnGPikA6qbXo5z0z2S/k8/9gJIccdUMR8=
+  skip_cleanup: true
   file_glob: true
   file: build/*
   on:
