@@ -3,6 +3,8 @@ pfbackup
 
 pfbackup backups pfSense configurations
 
+[![Build Status](https://travis-ci.org/lucasheld/pfbackup.svg?branch=master)](https://travis-ci.org/lucasheld/pfbackup)
+
 ## Compilation
 ```console
 $ git clone https://github.com/lucasheld/pfbackup.git
@@ -25,4 +27,5 @@ Flags:
       --path string   path to output directory (default ".")
       --url string    pfSense url (required)
       --user string   pfSense username (required)
+  -v, --version       Print the version number
 ```
