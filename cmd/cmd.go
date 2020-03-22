@@ -5,6 +5,7 @@ import (
 	"github.com/lucasheld/pfbackup/pfsense"
 	"github.com/lucasheld/pfbackup/version"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	"io/ioutil"
 	"log"
 	"os"
@@ -24,6 +25,9 @@ var (
 	rootCmd = &cobra.Command{
 		Use:   "pfbackup",
 		Short: "pfbackup backups pfSense configurations",
+		PreRunE: func(cmd *cobra.Command, args []string) error {
+			return checkRequiredFlags(cmd.Flags())
+		},
 		Run: func(cmd *cobra.Command, args []string) {
 			run()
 		},
@@ -45,10 +49,37 @@ func init() {
 	rootCmd.Flags().StringVarP(&pass, "pass", "", "", "pfSense password (required)")
 	rootCmd.Flags().BoolVarP(&noVerify, "no-verify", "", false, "do not verify ssl certificate")
 	rootCmd.Flags().StringVarP(&path, "path", "", ".", "path to output directory")
+}
 
-	rootCmd.MarkFlagRequired("url")
-	rootCmd.MarkFlagRequired("user")
-	rootCmd.MarkFlagRequired("pass")
+func checkRequiredFlags(flags *pflag.FlagSet) error {
+	// show version does not require any flags
+	if showVersion {
+		return nil
+	}
+
+	// check for missing flags
+	missingFlags := []string{}
+	flags.VisitAll(func(flag *pflag.Flag) {
+		for _, f := range []string{"url", "user", "pass"} {
+			if f == flag.Name && flag.Value.String() == flag.DefValue {
+				missingFlags = append(missingFlags, f)
+			}
+		}
+	})
+
+	// return error of missing flags
+	if len(missingFlags) != 0 {
+		missingFlagsStr := ""
+		for _, f := range missingFlags {
+			if missingFlagsStr != "" {
+				missingFlagsStr += ", "
+			}
+			missingFlagsStr += fmt.Sprintf("\"%s\"", f)
+		}
+		return fmt.Errorf("Required flag(s) %s not set", missingFlagsStr)
+	}
+
+	return nil
 }
 
 func printVersion() {
