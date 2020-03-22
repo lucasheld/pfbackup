@@ -20,9 +20,9 @@ func getFilename(response *http.Response) string {
 	return filename
 }
 
-func GetConfig(pfsense *Pfsense) *Config {
+func (pfsense *Pfsense) GetConfig() *Config {
 	currentUrl := pfsense.Settings.Url + "/diag_backup.php"
-	token := getToken(pfsense, currentUrl)
+	token := pfsense.getToken(currentUrl)
 	buf := new(bytes.Buffer)
 	w := multipart.NewWriter(buf)
 	defer w.Close()

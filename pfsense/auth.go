@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func getToken(pfsense *Pfsense, url string) string {
+func (pfsense *Pfsense) getToken(url string) string {
 	resp, err := pfsense.Client.Get(url)
 	if err != nil {
 		log.Fatalf("Failed get token: %v", err)
@@ -28,9 +28,9 @@ func getToken(pfsense *Pfsense, url string) string {
 	return token
 }
 
-func Login(pfsense *Pfsense) {
+func (pfsense *Pfsense) Login() {
 	currentUrl := pfsense.Settings.Url
-	token := getToken(pfsense, currentUrl)
+	token := pfsense.getToken(currentUrl)
 	data := url.Values{
 		"__csrf_magic": {token},
 		"usernamefld":  {pfsense.Settings.User},

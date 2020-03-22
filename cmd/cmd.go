@@ -83,8 +83,8 @@ func run() {
 		Client:   client,
 	}
 
-	pfsense.Login(pf)
-	config := pfsense.GetConfig(pf)
+	pf.Login()
+	config := pf.GetConfig()
 	path = strings.TrimSuffix(path, "/")
 	outDir := filepath.Join(path, config.Filename)
 	writeConfigFile(outDir, config.Content)
