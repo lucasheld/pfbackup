@@ -43,7 +43,6 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().BoolVarP(&showVersion, "version", "v", false, "Print the version number")
-
 	rootCmd.Flags().StringVarP(&url, "url", "", "", "pfSense url (required)")
 	rootCmd.Flags().StringVarP(&user, "user", "", "", "pfSense username (required)")
 	rootCmd.Flags().StringVarP(&pass, "pass", "", "", "pfSense password (required)")
