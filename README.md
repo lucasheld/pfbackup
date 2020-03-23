@@ -4,6 +4,8 @@ pfbackup
 pfbackup backups pfSense configurations
 
 [![Build Status](https://travis-ci.org/lucasheld/pfbackup.svg?branch=master)](https://travis-ci.org/lucasheld/pfbackup)
+[![Docker Build](https://img.shields.io/docker/build/lucasheld/pfbackup.svg)](https://hub.docker.com/r/lucasheld/pfbackup)
+[![Docker Pulls](https://img.shields.io/docker/pulls/lucasheld/pfbackup.svg)](https://hub.docker.com/r/lucasheld/pfbackup)
 
 ## Compilation
 ```console
