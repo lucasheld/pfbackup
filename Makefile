@@ -1,7 +1,7 @@
 OUT_DIR := ./build/
 OUT_NAME := pfbackup
 OUT := ${OUT_DIR}${OUT_NAME}
-VERSION := $(shell git describe --tags --abbrev=0)
+VERSION := $(shell git describe --tags)
 PKG := github.com/lucasheld/pfbackup
 
 .PHONY: help
