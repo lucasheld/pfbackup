@@ -3,7 +3,7 @@ FROM golang:alpine AS builder
 COPY . /go/src/github.com/lucasheld/pfbackup/
 WORKDIR /go/src/github.com/lucasheld/pfbackup/
 
-RUN apk --no-cache add make
+RUN apk --no-cache add make git
 RUN GOOS=linux GOARCH=amd64 make build
 RUN ./build/pfbackup --version
 
